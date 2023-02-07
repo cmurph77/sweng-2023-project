@@ -1,0 +1,21 @@
+{
+  "name": "sweng-2023-project",
+  "version": "1.0.0",
+  "description": "This is a repository for the Software Engineering Project 2023.",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cmurph77/sweng-2023-project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cmurph77/sweng-2023-project/issues"
+  },
+  "homepage": "https://github.com/cmurph77/sweng-2023-project#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.30.0"
+  }
+}

@@ -1,6 +1,10 @@
-function TextBox(){
+function TextBox({value, onChange}){
     return (
-        <div>pretend text box</div>
+        <input
+            className = "input"
+            value = {value}
+            onChange={(e) => onChange(e.target.value)}
+        />
     );
 }
 

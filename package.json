@@ -16,6 +16,7 @@
   },
   "homepage": "https://github.com/cmurph77/sweng-2023-project#readme",
   "devDependencies": {
-    "@playwright/test": "^1.30.0"
+    "@playwright/test": "^1.30.0",
+    "axe-core": "^4.6.3"
   }
 }

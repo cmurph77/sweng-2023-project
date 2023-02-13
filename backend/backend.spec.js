@@ -1,4 +1,7 @@
+<script src="node_modules/axe-core/axe.min.js"></script>
 // @ts-check
+
+
 const { test, expect } = require('@playwright/test');
 
 

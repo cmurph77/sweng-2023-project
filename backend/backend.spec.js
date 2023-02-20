@@ -1,11 +1,12 @@
 const { test, expect } = require('@playwright/test');
 const { injectAxe, getAxeResults } = require('axe-playwright');
+require('dotenv').config();
 
 
 
 
 test('has title', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
+  await page.goto(process.env.URL);
 
 });
 test.afterAll(async ({ page }) => {

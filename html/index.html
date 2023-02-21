@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>My Website</title>	
+	</head>
+	<body align = "center">
+        <label>
+            Enter a url: <input type="text" name="Name" id="userInput">
+		</label>
+		<button type="button" onclick="getURL()">Enter</button>
+		<script>
+			async function getURL(){
+				const url = await document.getElementById('userInput').value;
+				const data = {
+					url: url
+				};
+				const options = {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify(data)
+				}
+				const response = await fetch('/api', options);
+				const json = await response.json();
+				console.log(json);
+			}
+		</script>
+    </body>
+</html>

@@ -1,30 +1,20 @@
-<script axe="node_modules/axe-core/axe.min.js"></script>
+<script src="node_modules/axe-core/axe.min.js"></script>
 // @ts-check
-
-
 const { test, expect } = require('@playwright/test');
-const axe = require('axe-core');
+//const axe = require('axe-core');
+const { injectAxe, getAxeResults } = require('axe-playwright');
 
 
-
-
-test('has title', async ({ page }) => {
+test('has title', async ({page}) => {
   await page.goto('https://playwright.dev/');
 
 });
-test.afterAll(async () => {
-    console.log('Done with tests');
-    // ...
-    axe
-      .run()
-      .then(results => {
-      if (results.violations.length) {
-        throw new Error('Accessibility issues found');
-      }
-      })
+test.afterAll(async ( { page }) => {
   
-      .catch(err => {
-        console.error('Something bad happened:', err.message);
-      });
+  console.log('Done with tests');
+  await injectAxe(page);
+  console.log(await getAxeResults(page));
+
   
-  });
+});
+

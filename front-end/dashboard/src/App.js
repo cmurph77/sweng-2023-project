@@ -1,21 +1,19 @@
-import TextBox from './TextBox';
-import Button from './Button';
-import './App.css';
+import homePage from './pages/homePage';
+import resultPage from './pages/resultPage';
+import Route from './Route';
+import './pages/App.css';
 
 function App(){
     return (
-        <div className="App">
-          <header className="App-header">
-            <p>
-              Enter Website URL here
-            </p>
-            <br></br>
-            <TextBox/>
-            <br></br>
-            <Button/>
-          </header>
-        </div>
-      );
+      <div>
+        <Route path = "/">
+          {homePage()}
+        </Route>
+        <Route path = "/result">
+          {resultPage()}
+        </Route>
+      </div>
+    );
 }
 
 export default App;

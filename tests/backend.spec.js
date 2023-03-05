@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-const AxeCore = require()
+// const AxeCore = require()
 
 test('test', async ({ page }) => {
   await page.goto('https://www.google.com/');

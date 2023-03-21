@@ -1,6 +1,8 @@
 const express = require('express');
 const { validateHeaderValue } = require('http');
 
+const fs = require('fs');
+
 const {MongoClient} = require('mongodb');
 
 var ObjectID = require('mongodb').ObjectId;
@@ -96,8 +98,16 @@ app.post('/api', (request, response) => {
             }
         });
     const data = {      // this is the axe core data organised in JSON format
-        problems: keepDataTogether
+        keepDataTogether
     }
+    const jsonString = JSON.stringify(data);
+    fs.writeFile('./output.json', jsonString, err => {
+        if (err) {
+            console.log('Error writing file', err)
+        } else {
+            console.log('Successfully wrote file')
+        }
+    })
 
     let uniqueID = create(client, data);
     console.log(uniqueID);

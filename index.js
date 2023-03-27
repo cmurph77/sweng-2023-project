@@ -7,17 +7,60 @@ const {MongoClient} = require('mongodb');
 
 var ObjectID = require('mongodb').ObjectId;
 
+const swaggerJSDoc = require('swagger-jsdoc');
+const swaggerUI = require('swagger-ui-express');
+const options = {
+    definition: {
+        openai: '3.0.0',
+        info: {
+            title: 'A11Y API Doc',
+            version: '1.0.0'
+        },
+        servers:['http://localhost:3000/']
+    },
+    apis: ['index.js']
+}
+const swaggerSpec = swaggerJSDoc(options);
 const app = express();
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerSpec));
 app.listen(3000);
 app.use(express.static('html'));
 app.use(express.json({ limit: '1mb' }));
 
+/**
+ * @swagger
+ *   /api:
+ *     post:
+ *       summary: Post axe-core results of webpage to database
+ *       description: Post axe-core results of webpage to database by URL specified
+ *       requestBody:
+ *         description: Post axe-core  results of webpage to database by URL specified
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 url:
+ *                   type: string
+ *                   example: https://www.youtube.com
+ *               required:
+ *                 - url
+ *         required: true
+ *       responses:
+ *         '200':
+ *           description: Successful operation
+ *         '400':
+ *           description: Invalid URL supplied
+ *         '404':
+ *           description: Site not found
+ */
 app.post('/api', (request, response) => {
     const uri = "mongodb+srv://sweng-everyone:xAQOgbhP2hyPPGRF@sweng-project-14.p7t0oxl.mongodb.net/?retryWrites=true&w=majority";
     const client = new MongoClient(uri);
     client.connect();
     const url = request.body;
     console.log(url);
+    fs.writeFileSync('url.txt', url.url, 'utf-8');
     const execSync = require('child_process').execSync;
     const dataStream = execSync('npx playwright test /backend', { encoding: 'utf-8' });
     const browsers = dataStream.split("userAgent:");
@@ -117,6 +160,51 @@ app.post('/api', (request, response) => {
     })
 })
 
+/**
+ * @swagger
+ * /api/{id}:
+ *  tags: axe-core
+ *  get:
+ *    summary: Get axe-core results json document by id string
+ *    description: Returns a single axe-core result json document
+ *    parameters:
+ *      - name: id
+ *        in: path
+ *        description: ID of axe-core results json document to return
+ *        required: true
+ *        schema:
+ *          type: string
+ *          example: 641854190da7af879b1f474f
+ *    responses:
+ *      '200':
+ *        description: Successful operation
+ *      '400':
+ *        description: Invalid document ID
+ *      '404':
+ *        description: Document does not exist
+ *      '500':
+ *        description: Could not fetch the document
+ */
+app.get('/api/:id', (request, response) => {
+    const uri = "mongodb+srv://sweng-everyone:xAQOgbhP2hyPPGRF@sweng-project-14.p7t0oxl.mongodb.net/?retryWrites=true&w=majority";
+    const client = new MongoClient(uri);
+    client.connect();
+    if (ObjectID.isValid(request.params.id)) {
+        client.db("backend_sweng").collection("axe_core_results")
+        .findOne({_id: new ObjectID(request.params.id)})
+        .then(doc => {
+            if (doc != null)
+                response.status(200).json(doc)
+            else
+                response.status(404).json({error: 'Document does not exist'});
+        })
+        .catch(err => {
+            response.status(500).json({error: 'Could not fetch the document'});
+        })
+    } else {
+        response.status(400).json({error: 'Invalid document ID. Must be a 24 character hex string, 12 byte binary Buffer, or a number.'})
+    }
+})
 
 function create(client, newTest) {
     let id = new ObjectID(32);

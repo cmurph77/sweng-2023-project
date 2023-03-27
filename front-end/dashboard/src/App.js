@@ -10,6 +10,7 @@ function App(){
           {homePage()}
         </Route>
         <Route path = "/result">
+          <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
           {resultPage()}
         </Route>
       </div>

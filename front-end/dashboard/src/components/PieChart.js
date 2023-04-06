@@ -1,9 +1,8 @@
 import Chart from 'chart.js/auto';
 
 function renderPieChart(counts, chartContainer) {
-  const ctx = chartContainer.getContext('2d');
 
-  return new Chart(ctx, {
+  return new Chart(chartContainer, {
     type: 'pie',
     data: {
       labels: Object.keys(counts),

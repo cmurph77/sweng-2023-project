@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const { validateHeaderValue } = require('http');
 
 const fs = require('fs');
@@ -24,6 +25,7 @@ const swaggerSpec = swaggerJSDoc(options);
 const app = express();
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerSpec));
 app.listen(3000);
+app.use(cors());
 app.use(express.static('html'));
 app.use(express.json({ limit: '1mb' }));
 

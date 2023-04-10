@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "This is a repository for the Software Engineering Project 2023.",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/cmurph77/sweng-2023-project.git"

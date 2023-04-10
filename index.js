@@ -208,6 +208,10 @@ app.get('/api/:id', (request, response) => {
     }
 })
 
+app.get('/message', (req, res) => {
+    res.json({ message: "Hello from server!" });
+});
+
 function create(client, newTest) {
     let id = new ObjectID(32);
     client.db("backend_sweng").collection("axe_core_results").insertOne({_id: id, newTest});

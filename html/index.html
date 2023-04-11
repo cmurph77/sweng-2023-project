@@ -46,11 +46,12 @@
         // Simulate the API call with a setTimeout
         setTimeout(async () => {
             // Replace this with the actual API call
-            // const response = await fetch('/api', options);
-            // const json = await response.json();
-            // document.getElementById('response-json').textContent = json.data;
+            const response = await fetch('/api', options);
+            const json = await response.json();
+            document.getElementById('response-json').textContent = json.data;
 
             // Sample API response
+            /*
             const json = {
                 data: "Sample API response",
                 chartData: {
@@ -58,6 +59,7 @@
                     values: [10, 20, 30]
                 }
             };
+            */
 
             document.getElementById('response-json').textContent = json.data;
             displayPieChart(json.chartData);

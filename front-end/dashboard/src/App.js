@@ -6,17 +6,7 @@ import './pages/App.css';
 
 function App(){
   /*
-    return (
-      <div>
-        <Route path = "/">
-          {homePage()}
-        </Route>
-        <Route path = "/result">
-          <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-          {resultPage()}
-        </Route>
-      </div>
-    );
+
     */
     const [message, setMessage] = useState("");
 
@@ -27,8 +17,14 @@ function App(){
     }, []);
   
     return (
-      <div className="App">
-        <h1>{message}</h1>
+      <div>
+        <Route path = "/">
+          {homePage()}
+        </Route>
+        <Route path = "/result">
+          <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+          {resultPage(message)}
+        </Route>
       </div>
     );
 }

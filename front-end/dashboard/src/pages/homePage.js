@@ -1,18 +1,16 @@
 import TextBox from '../components/TextBox';
 import Button from '../components/Button';
 import axeCoreLogo from '../images/axeCoreLogo.png';
+
 //import './App.css';
 
-function homePage(){
+function homePage(message){
     return (
       <div className="App">
         <header className="App-header">
           <img src = {axeCoreLogo} alt = "axe core logo" />
-          <p>
-            Enter Website URL here
-          </p>
-          <br></br>
-          <TextBox/>
+          <label htmlFor="userInput">Enter a URL:</label>
+          <input type="text" name="Name" id="userInput"></input>
           <br></br>
           <Button destination = '/result' />
         </header>

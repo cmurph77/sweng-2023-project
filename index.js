@@ -146,7 +146,7 @@ app.post('/api', (request, response) => {
         keepDataTogether
     }
     const jsonString = JSON.stringify(data);
-    fs.writeFile('./output.json', jsonString, err => {
+    fs.writeFile('./front-end/dashboard/data/output.json', jsonString, err => {
         if (err) {
             console.log('Error writing file', err)
         } else {
@@ -209,7 +209,14 @@ app.get('/api/:id', (request, response) => {
 })
 
 app.get('/message', (req, res) => {
-    res.json({ message: "Hello from server!" });
+    res.json({message : "Eimhin"});
+    /*
+    const uri = "mongodb+srv://sweng-everyone:xAQOgbhP2hyPPGRF@sweng-project-14.p7t0oxl.mongodb.net/?retryWrites=true&w=majority";
+    const client = new MongoClient(uri);
+    client.connect();
+    res.json(client.db("backend_sweng").collection("axe_core_results").find().sort({_id: id}));
+    client.close();
+    */
 });
 
 function create(client, newTest) {

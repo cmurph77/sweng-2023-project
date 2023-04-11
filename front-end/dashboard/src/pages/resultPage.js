@@ -3,7 +3,7 @@ import { useEffect, useRef, useState, useMemo } from 'react';
 import renderPieChart from '../components/PieChart';
 import './App.css';
 
-function ResultPage() {
+function ResultPage(message) {
   const [chartReady, setChartReady] = useState(false);
   const counts = useMemo(() => {
     const result = {};

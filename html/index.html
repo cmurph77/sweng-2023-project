@@ -3,84 +3,124 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Website</title>
+    <title>Accessibility Checker</title>
     <style>
-        body {
-            background-color: #f0f0f0;
-            font-family: 'Arial', sans-serif;
-            font-size: 16px;
-            line-height: 1.5;
+        .App {
+            text-align: center;
         }
-        /* ... Rest of the CSS styles ... */
-        /* ... */
-        #pieChart {
-            max-width: 250px;
-            max-height: 250px;
+
+        .App-header {
+            background-color: #080d24;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: calc(10px + 2vmin);
+            color: white;
         }
     </style>
-    <!-- Include the Chart.js library -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-<div style="text-align: center; margin-top: 50px;">
-    <label for="userInput">Enter a URL:</label>
-    <input type="text" name="Name" id="userInput">
-    <button type="button" onclick="getURL()">Enter</button>
-    <ol>Axe-core results: <span id="response-json"></span></ol>
-    <canvas id="pieChart" width="250" height="250" style="display: none;"></canvas>
-</div>
-<script>
-    async function getURL() {
-        const url = document.getElementById('userInput').value;
-        const data = {
-            url: url
-        };
-        const options = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
+    <div id="app">
+        <!-- Home Page -->
+        <div id="homePage" class="App">
+            <header class="App-header">
+                <img src="axeCoreLogo.png" alt="axe core logo" />
+                <p>
+                    Enter Website URL here
+                </p>
+                <br>
+                <input id="urlInput"
+                    class="input"
+                    size="60"
+                />
+                <br>
+                <button type="button" onclick="navigateToResult()">
+                    Check Accessibility!
+                </button>
+            </header>
+        </div>
+
+        <!-- Result Page -->
+        <div id="resultPage" class="App" style="display:none;">
+            <header class="App-header">
+                <h2>Accessibility Impacts by Frequency</h2>
+                <canvas id="chartCanvas"
+                    style="width: 500px; height: 500px;"
+                ></canvas>
+            </header>
+        </div>
+    </div>
+    <script>
+        let chartInstance;
+
+        function navigateToResult() {
+            window.history.pushState({}, "", "/result");
+            fetchDataAndUpdateChart();
+            updatePageVisibility();
         }
 
-        // Simulate the API call with a setTimeout
-        setTimeout(async () => {
-            // Replace this with the actual API call
-            // const response = await fetch('/api', options);
-            // const json = await response.json();
-            // document.getElementById('response-json').textContent = json.data;
+        function updatePageVisibility() {
+            const path = window.location.pathname;
+            document.getElementById("homePage").style.display = path === "/" ? "block" : "none";
+            document.getElementById("resultPage").style.display = path === "/result" ? "block" : "none";
+        }
 
-            // Sample API response
-            const json = {
-                data: "Sample API response",
-                chartData: {
-                    labels: ['Label 1', 'Label 2', 'Label 3'],
-                    values: [10, 20, 30]
-                }
-            };
+        function fetchDataAndUpdateChart() {
+            // Replace with server's URL
+            fetch("")
+                .then((response) => response.json())
+                .then((data) => {
+                    const counts = data.problems.reduce((acc, problem) => {
+                        const impactList = problem.impactList;
+                        if (impactList !== null) {
+                            acc[impactList] = (acc[impactList] || 0) + 1;
+                        }
+                        return acc;
+                    }, {});
 
-            document.getElementById('response-json').textContent = json.data;
-            displayPieChart(json.chartData);
-        }, 1000);
-    }
+                    if (chartInstance) {
+                        chartInstance.destroy();
+                    }
+                    renderChart(counts);
+                });
+        }
 
-    function displayPieChart(chartData) {
-        const pieChartData = {
-            labels: chartData.labels,
-            datasets: [{
-                data: chartData.values,
-                backgroundColor: ['#ff6384', '#36a2eb', '#cc65fe']
-            }]
-        };
+        function renderChart(chartData) {
+            const chartContainer = document.getElementById("chartCanvas");
+            chartInstance = new Chart(chartContainer, {
+                type: "pie",
+                data: {
+                    labels: Object.keys(chartData),
+                    datasets: [
+                        {
+                            label: "# of Occurrences",
+                            data: Object.values(chartData),
+                            borderWidth: 1,
+                            backgroundColor: [
+                                "rgba(240, 93, 35, 1)",
+                                "rgba(11, 110, 79, 1)",
+                                "rgba(255, 227, 41, 1)",
+                                "rgba(140, 0, 26, 1)",
+                            ],
+                            borderColor: "#080d24",
+                        },
+                    ],
+                },
+                options: {
+                    maintainAspectRatio: true,
+                    responsive: false,
+                },
+            });
+        }
 
-        const pieChartElement = document.getElementById('pieChart');
-        pieChartElement.style.display = 'block';
-        const ctx = pieChartElement.getContext('2d');
-        new Chart(ctx, {
-            type: 'pie',
-            data: pieChartData
+        window.addEventListener("popstate", () => {
+            updatePageVisibility();
         });
-    }
-</script>
+
+        updatePageVisibility();
+    </script>
 </body>
 </html>

@@ -2,7 +2,7 @@ import Link from './Link';
 
 const Button = ({destination}) =>{
   const handleClick = () => {
-    //what happens when button pressed
+    // what happens when button pressed
   };
 
   return (

@@ -1,9 +1,36 @@
-import data from '../data/output.json';
+import testData from '../data/output.json'
 import { useEffect, useRef, useState, useMemo } from 'react';
 import renderPieChart from '../components/PieChart';
 import './App.css';
 
 function ResultPage() {
+  const [data, setData] = useState(testData);
+  useEffect(() => {
+    
+
+    async function fetchData() {
+      console.log("hereee");
+      const responseTest = await fetch("http://localhost:3000/api/", {
+        method: "POST",
+        headers: {
+          'Content-type': "application/json"
+        },
+        body: JSON.stringify({ url: "http://rte.ie" })
+      })
+      //console.log( await responseTest.json());
+      const temp = await responseTest.json();
+      setData(temp);
+      //const response = await fetch("http://localhost:3000/api/");
+      
+
+    }
+
+    fetchData();
+
+
+  }, []);
+
+  console.log(data);
   const [chartReady, setChartReady] = useState(false);
   const counts = useMemo(() => {
     const result = {};
@@ -14,7 +41,7 @@ function ResultPage() {
       }
     });
     return result;
-  }, []);
+  }, [data]);
 
   const chartContainer = useRef(null);
 
@@ -31,6 +58,7 @@ function ResultPage() {
     }
   }, [counts, chartReady]);
 
+
   return (
     <div className="App">
       <header className="App-header">
@@ -44,6 +72,11 @@ function ResultPage() {
       </header>
     </div>
   );
-}
+  /*
+   return (
+      <h1>test</h1>
+   );
+   */
 
+}
 export default ResultPage;

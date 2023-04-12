@@ -6,7 +6,6 @@ import './App.css';
 function ResultPage() {
   const [data, setData] = useState(testData);
   useEffect(() => {
-    
 
     async function fetchData() {
       console.log("hereee");

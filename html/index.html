@@ -120,10 +120,15 @@
 
             const response = await fetch('/api', options);
 				
-            const json = await response.json();
+            const jsonList = await response.json();
 			//document.getElementById('response-json').textContent = json.data;
             
-            renderChart(json.jsonList);
+
+            if (chartInstance) {
+                chartInstance.destroy();
+            }
+            renderChart(getChartData(jsonList));
+            console.log(jsonList.stringify);
         }
 
         function renderChart(chartData) {
@@ -131,7 +136,8 @@
             chartInstance = new Chart(chartContainer, {
                 type: "pie",
                 data: {
-                    labels: Object.keys(chartData),
+                    //labels: Object.keys(chartData),
+                    labels: "critical",
                     datasets: [
                         {
                             label: "# of Occurrences",
@@ -151,6 +157,18 @@
                     maintainAspectRatio: true,
                     responsive: false,
                 },
+            });
+        }
+        function getChartData(listOfJson) {
+            var critical = 0;
+            var serious = 0;
+            var moderate = 0;
+            var minor = 0;
+            listOfJson.forEach(element => {
+                if (element.impactList == 'critical' ) critical++;
+                else if (element.impactList == 'serious') serious++;
+                else if (element.impactList == 'moderate') moderate++;
+                else if (element.impactList == 'minor') minor++;
             });
         }
 

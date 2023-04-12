@@ -5,6 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Accessibility Checker</title>
     <style>
+        
+        body {
+            background-color: #f0f0f0;
+            font-family: 'Arial', sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+        /* ... Rest of the CSS styles ... */
+        /* ... */
+        #pieChart {
+            max-width: 250px;
+            max-height: 250px;
+        }
+    
         .App {
             text-align: center;
         }
@@ -40,6 +54,7 @@
                 <button type="button" onclick="navigateToResult()">
                     Check Accessibility!
                 </button>
+                <!--<canvas id="pieChart" width="250" height="250" style="display: none;"></canvas>-->
             </header>
         </div>
 
@@ -62,29 +77,53 @@
             updatePageVisibility();
         }
 
-        // Simulate the API call with a setTimeout
-        setTimeout(async () => {
-            // Replace this with the actual API call
-            const response = await fetch('/api', options);
-            const json = await response.json();
-            document.getElementById('response-json').textContent = json.data;
+        function updatePageVisibility() {
+            const path = window.location.pathname;
+            document.getElementById("homePage").style.display = path === "/" ? "block" : "none";
+            document.getElementById("resultPage").style.display = path === "/result" ? "block" : "none";
+        }
 
-            // Sample API response
-            /*
-            const json = {
-                data: "Sample API response",
-                chartData: {
-                    labels: ['Label 1', 'Label 2', 'Label 3'],
-                    values: [10, 20, 30]
-                }
+        async function fetchDataAndUpdateChart() {
+            // Replace with server's URL
+            const url = await document.getElementById('urlInput').value;
+            const myData = {
+                url: url
             };
-            */
+
+            const options = {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify(myData)
+				}
+                
+            /*
+            fetch('/api', options)
+                .then((response) => response.json())
+                .then((data) => {
+        
+                    const counts = data.problems.reduce((acc, problem) => {
+                        const impactList = problem.impactList;
+                        if (impactList !== null) {
+                            acc[impactList] = (acc[impactList] || 0) + 1;
+                        }
+                        return acc;
+                    }, {});
 
                     if (chartInstance) {
                         chartInstance.destroy();
                     }
                     renderChart(counts);
                 });
+            */
+
+            const response = await fetch('/api', options);
+				
+            const json = await response.json();
+			//document.getElementById('response-json').textContent = json.data;
+            
+            renderChart(json.jsonList);
         }
 
         function renderChart(chartData) {

@@ -146,19 +146,20 @@ app.post('/api', (request, response) => {
         keepDataTogether
     }
     const jsonString = JSON.stringify(data);
-    fs.writeFile('./front-end/dashboard/data/output.json', jsonString, err => {
+    fs.writeFile('./output.json', jsonString, err => {
         if (err) {
             console.log('Error writing file', err)
         } else {
             console.log('Successfully wrote file')
         }
     })
+    //console.log(jsonString);
 
     let uniqueID = create(client, data);
     console.log(uniqueID);
 
     response.json({
-        data: dataStream  // sends back the results in json format
+        jsonList: keepDataTogether  // sends back the results in json format
     })
 })
 

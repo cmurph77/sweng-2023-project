@@ -13,7 +13,7 @@ const Button = ({destination}) =>{
             },
             body: JSON.stringify(data)
         }
-        const response = await fetch('http://localhost:3000//api', options);
+        const response = await fetch('http://localhost:3000/api', options);
         const json = await response.json();
   };
 

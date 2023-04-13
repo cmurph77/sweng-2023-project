@@ -61,18 +61,13 @@ app.post('/api', (request, response) => {
     const client = new MongoClient(uri);
     client.connect();
     const url = request.body.url;
-    console.log(url);
+    console.log("Receiving post request for url: ",url);
     fs.writeFileSync('url.txt', url, 'utf-8');
-    console.log("write");
     const execSync = require('child_process').execSync;
-    console.log("1");
     const dataStream = execSync('npx playwright test /backend', { encoding: 'utf-8' });
 
-    console.log("2");
     const browsers = dataStream.split("userAgent:");
-    console.log("3");
     var jsonItems = [];
-    console.log("4");
 
     //variables of each item
     var ids = [];
@@ -84,7 +79,6 @@ app.post('/api', (request, response) => {
 
     var keepDataTogether = [];
 
-    console.log("before for each");
     browsers.forEach(browser => {
         if (browser.indexOf("inapplicable: [") != -1) {
             firstPos = browser.indexOf("inapplicable: [");
@@ -152,7 +146,6 @@ app.post('/api', (request, response) => {
     const data = {      // this is the axe core data organised in JSON format
         keepDataTogether
     }
-    console.log(data);
     const jsonString = JSON.stringify(data);
     fs.writeFile('./output.json', jsonString, err => {
         if (err) {

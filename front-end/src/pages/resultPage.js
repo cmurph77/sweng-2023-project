@@ -10,12 +10,12 @@ function ResultPage(props) {
   const { theLink, clicked } = props
 
   const [data, setData] = useState(testData);
-  console.log({ theLink });
+  
   useEffect(() => {
     async function fetchData() {
       const user_url = { theLink };
-      console.log(user_url);
-      console.log("fetch");
+      //console.log(user_url);
+      console.log("Fetching data from API with url: ", user_url);
       const responseTest = await fetch("http://localhost:3000/api/", {
         method: "POST",
         headers: {
@@ -23,15 +23,10 @@ function ResultPage(props) {
         },
         body: JSON.stringify({ url: user_url.theLink })
       })
-
-      //console.log( await responseTest.json());
       const temp = await responseTest.json();
-
       setData(temp);
-
-
-      //const response = await fetch("http://localhost:3000/api/");
     }
+    
     if (clicked) {
       fetchData();
     }

@@ -3,6 +3,7 @@ import Link from './components/Link';
 import axeCoreLogo from './images/axeCoreLogo.png';
 import { useState } from 'react';
 import resultPage from './pages/resultPage';
+import viewRawData from './pages/viewRawData';
 
 import Route from './Route';
 //import React, { useState, useEffect } from "react";
@@ -16,13 +17,13 @@ function App() {
 
   function handleForceUpdate() {
     setClicked(true);
-    console.log(clicked);
+    //console.log(clicked);
   }
 
   const updateLink = event => {
     updateTheLink(event.target.value);
-    console.log(theLink);
-    console.log(clicked);
+    //console.log(theLink);
+    //console.log(clicked);
     //fs.writeFileSync('../data.json', JSON.stringify({link: event.target.value}));
   }
 

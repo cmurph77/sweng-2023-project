@@ -1,14 +1,16 @@
 import Chart from 'chart.js/auto';
 
 function renderPieChart(counts, chartContainer) {
+  const labels = Object.keys(counts).filter((key) => key !== 'undefined');
+  const data = Object.values(counts).filter((value) => value !== undefined);
 
   return new Chart(chartContainer, {
     type: 'pie',
     data: {
-      labels: Object.keys(counts),
+      labels: labels,
       datasets: [{
         label: '# of Occurrences',
-        data: Object.values(counts),
+        data: data,
         borderWidth: 1,
         backgroundColor: [
           'rgba(240, 93, 35, 1)', // orange
@@ -24,7 +26,6 @@ function renderPieChart(counts, chartContainer) {
       responsive: false
     }
   });
-  
 }
 
 export default renderPieChart;

@@ -3,6 +3,130 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<< HEAD
+<<<<<<< HEAD
+    <title>Accessibility Checker</title>
+    <style>
+        .App {
+            text-align: center;
+        }
+
+        .App-header {
+            background-color: #080d24;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: calc(10px + 2vmin);
+            color: white;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- Home Page -->
+        <div id="homePage" class="App">
+            <header class="App-header">
+                <img src="axeCoreLogo.png" alt="axe core logo" />
+                <p>
+                    Enter Website URL here
+                </p>
+                <br>
+                <input id="urlInput"
+                    class="input"
+                    size="60"
+                />
+                <br>
+                <button type="button" onclick="navigateToResult()">
+                    Check Accessibility!
+                </button>
+            </header>
+        </div>
+
+        <!-- Result Page -->
+        <div id="resultPage" class="App" style="display:none;">
+            <header class="App-header">
+                <h2>Accessibility Impacts by Frequency</h2>
+                <canvas id="chartCanvas"
+                    style="width: 500px; height: 500px;"
+                ></canvas>
+            </header>
+        </div>
+    </div>
+    <script>
+        let chartInstance;
+
+        function navigateToResult() {
+            window.history.pushState({}, "", "/result");
+            fetchDataAndUpdateChart();
+            updatePageVisibility();
+        }
+
+        function updatePageVisibility() {
+            const path = window.location.pathname;
+            document.getElementById("homePage").style.display = path === "/" ? "block" : "none";
+            document.getElementById("resultPage").style.display = path === "/result" ? "block" : "none";
+        }
+
+        function fetchDataAndUpdateChart() {
+            // Replace with server's URL
+            fetch("")
+                .then((response) => response.json())
+                .then((data) => {
+                    const counts = data.problems.reduce((acc, problem) => {
+                        const impactList = problem.impactList;
+                        if (impactList !== null) {
+                            acc[impactList] = (acc[impactList] || 0) + 1;
+                        }
+                        return acc;
+                    }, {});
+
+                    if (chartInstance) {
+                        chartInstance.destroy();
+                    }
+                    renderChart(counts);
+                });
+        }
+
+        function renderChart(chartData) {
+            const chartContainer = document.getElementById("chartCanvas");
+            chartInstance = new Chart(chartContainer, {
+                type: "pie",
+                data: {
+                    labels: Object.keys(chartData),
+                    datasets: [
+                        {
+                            label: "# of Occurrences",
+                            data: Object.values(chartData),
+                            borderWidth: 1,
+                            backgroundColor: [
+                                "rgba(240, 93, 35, 1)",
+                                "rgba(11, 110, 79, 1)",
+                                "rgba(255, 227, 41, 1)",
+                                "rgba(140, 0, 26, 1)",
+                            ],
+                            borderColor: "#080d24",
+                        },
+                    ],
+                },
+                options: {
+                    maintainAspectRatio: true,
+                    responsive: false,
+                },
+            });
+        }
+
+        window.addEventListener("popstate", () => {
+            updatePageVisibility();
+        });
+
+        updatePageVisibility();
+    </script>
+=======
+=======
+>>>>>>> 15f462918363bd5e4ee0d3cc7f1cded949b3db3b
     <title>My Website</title>
     <style>
         body {
@@ -82,5 +206,9 @@
         });
     }
 </script>
+<<<<<<< HEAD
+>>>>>>> 15f462918363bd5e4ee0d3cc7f1cded949b3db3b
+=======
+>>>>>>> 15f462918363bd5e4ee0d3cc7f1cded949b3db3b
 </body>
 </html>

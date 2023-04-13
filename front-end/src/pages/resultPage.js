@@ -1,32 +1,41 @@
 import testData from '../data/output.json'
-import Button from '../components/Button';
+import Link from '../components/Link';
+
 import { useEffect, useRef, useState, useMemo } from 'react';
 import renderPieChart from '../components/PieChart';
 import './App.css';
+import sample_data from '../data/output.json';
 
+function ResultPage(props) {
+  const { theLink, clicked } = props
 
-function ResultPage() {
   const [data, setData] = useState(testData);
+  console.log({ theLink });
   useEffect(() => {
-    
-
     async function fetchData() {
-      console.log("hereee");
-      const user_url = "http://rte.ie";
+      const user_url = { theLink };
+      console.log(user_url);
+      console.log("fetch");
       const responseTest = await fetch("http://localhost:3000/api/", {
         method: "POST",
         headers: {
           'Content-type': "application/json"
         },
-        body: JSON.stringify({ url: user_url })
+        body: JSON.stringify({ url: user_url.theLink })
       })
-      const responseData = await responseTest.json();
-      setData(responseData); // updating the data with the resulsts of the latest scan
-     
 
+      //console.log( await responseTest.json());
+      const temp = await responseTest.json();
+
+      setData(temp);
+
+
+      //const response = await fetch("http://localhost:3000/api/");
     }
-    fetchData();
-  }, []);
+    if (clicked) {
+      fetchData();
+    }
+  }, [clicked]);
 
   const [chartReady, setChartReady] = useState(false);
 
@@ -64,13 +73,14 @@ function ResultPage() {
         {chartReady && (
           <canvas
             ref={chartContainer}
-
-            style={{ width: '400px' }}
-
+            style={{ width: '500px' }}
           ></canvas>
         )}
         <br></br>
-        <Button destination= '/rawdata' label="Click here to view the data from the scan." ></Button>
+        <Link to='/rawdata'>
+          <button type='button'>Click here to view the data from the scan.</button>
+        </Link>
+
       </header>
     </div>
   );

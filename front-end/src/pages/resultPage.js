@@ -3,30 +3,34 @@ import { useEffect, useRef, useState, useMemo } from 'react';
 import renderPieChart from '../components/PieChart';
 import './App.css';
 
-function ResultPage() {
+function ResultPage(props) {
+  const { theLink, clicked } = props
   const [data, setData] = useState(testData);
+  console.log("here");
+  console.log({ theLink });
   useEffect(() => {
-    
-
     async function fetchData() {
-      console.log("hereee");
-      const user_url = "http://rte.ie";
-      const responseTest = await fetch("http://localhost:3000/api/", {
-        method: "POST",
-        headers: {
-          'Content-type': "application/json"
-        },
-        body: JSON.stringify({ url: user_url })
-      })
-      //console.log( await responseTest.json());
-      const temp = await responseTest.json();
-      setData(temp);
-      //const response = await fetch("http://localhost:3000/api/");
-      
+      if (clicked) {
+        const user_url = { theLink };
+        console.log(user_url);
+        console.log("fetch");
+        const responseTest = await fetch("http://localhost:3000/api/", {
+          method: "POST",
+          headers: {
+            'Content-type': "application/json"
+          },
+          body: JSON.stringify({ url: user_url.theLink })
+        })
 
+        //console.log( await responseTest.json());
+        const temp = await responseTest.json();
+
+        setData(temp);
+      }
+      //const response = await fetch("http://localhost:3000/api/");
     }
     fetchData();
-  }, []);
+  }, [{ clicked }]);
 
   console.log(data);
   const [chartReady, setChartReady] = useState(false);

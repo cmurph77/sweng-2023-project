@@ -65,7 +65,7 @@ app.post('/api', (request, response) => {
     fs.writeFileSync('url.txt', url, 'utf-8');
     console.log("write");
     const execSync = require('child_process').execSync;
-
+    console.log("1");
     const dataStream = execSync('npx playwright test /backend', { encoding: 'utf-8' });
 
     console.log("2");

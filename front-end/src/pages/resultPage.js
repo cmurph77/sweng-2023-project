@@ -68,7 +68,7 @@ function ResultPage(props) {
         {chartReady && (
           <canvas
             ref={chartContainer}
-            style={{ width: '500px', height: '500px' }}
+            style={{ width: '500px' }}
           ></canvas>
         )}
       </header>

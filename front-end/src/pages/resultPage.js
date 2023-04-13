@@ -32,7 +32,7 @@ function ResultPage(props) {
     if (clicked) {
       fetchData();
     }
-  }, [{ clicked }]);
+  }, [clicked]);
 
   console.log(data);
   const [chartReady, setChartReady] = useState(false);

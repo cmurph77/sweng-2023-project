@@ -3,7 +3,7 @@ import React from 'react';
 const JsonDisplay = ({ data }) => {
   return (
     <div>
-      <pre>{JSON.stringify(data, null, 2)}</pre>
+      <pre style ={{ fontSize: '14px '}} >{JSON.stringify(data, null, 1)}</pre>
     </div>
   );
 };

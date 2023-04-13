@@ -1,8 +1,8 @@
 import Chart from 'chart.js/auto';
 
 function renderPieChart(counts, chartContainer) {
-  const labels = Object.keys(counts).filter((key) => key !== 'undefined');
-  const data = Object.values(counts).filter((value) => value !== undefined);
+  const labels = Object.keys(counts).filter(key => key !== 'undefined');
+  const data = Object.values(counts).filter(value => value !== undefined);
 
   return new Chart(chartContainer, {
     type: 'pie',

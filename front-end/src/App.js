@@ -3,7 +3,7 @@ import Link from './components/Link';
 import axeCoreLogo from './images/axeCoreLogo.png';
 import { useState } from 'react';
 import resultPage from './pages/resultPage';
-import viewRawData from './pages/viewRawData';
+
 import Route from './Route';
 //import React, { useState, useEffect } from "react";
 import './pages/App.css';
@@ -62,6 +62,7 @@ function App() {
       </Route>
     </div>
   );
+
 
 }
 

@@ -7,6 +7,7 @@ const Button = ({destination}) =>{
     <Link to = {destination}>
         <button type="button">
           Check Accessibility!
+
         </button>
     </Link>
   );

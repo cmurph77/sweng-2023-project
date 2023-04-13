@@ -1,5 +1,6 @@
 import testData from '../data/output.json'
 import Link from '../components/Link';
+
 import { useEffect, useRef, useState, useMemo } from 'react';
 import renderPieChart from '../components/PieChart';
 import './App.css';
@@ -7,6 +8,7 @@ import sample_data from '../data/output.json';
 
 function ResultPage(props) {
   const { theLink, clicked } = props
+
   const [data, setData] = useState(testData);
   console.log({ theLink });
   useEffect(() => {
@@ -27,6 +29,7 @@ function ResultPage(props) {
 
       setData(temp);
 
+
       //const response = await fetch("http://localhost:3000/api/");
     }
     if (clicked) {
@@ -34,8 +37,8 @@ function ResultPage(props) {
     }
   }, [clicked]);
 
-  console.log(data);
   const [chartReady, setChartReady] = useState(false);
+
   const counts = useMemo(() => {
     const result = {};
     data.problems.forEach((problem) => {
@@ -77,14 +80,10 @@ function ResultPage(props) {
         <Link to='/rawdata'>
           <button type='button'>Click here to view the data from the scan.</button>
         </Link>
+
       </header>
     </div>
   );
-  /*
-   return (
-      <h1>test</h1>
-   );
-   */
 
 }
 export default ResultPage;

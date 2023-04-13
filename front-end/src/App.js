@@ -3,42 +3,11 @@ import Link from './components/Link';
 import axeCoreLogo from './images/axeCoreLogo.png';
 import { useState } from 'react';
 import resultPage from './pages/resultPage';
-<<<<<<< HEAD
-<<<<<<< HEAD
 import viewRawData from './pages/viewRawData';
-
-=======
->>>>>>> 15f462918363bd5e4ee0d3cc7f1cded949b3db3b
-=======
->>>>>>> 15f462918363bd5e4ee0d3cc7f1cded949b3db3b
 import Route from './Route';
 //import React, { useState, useEffect } from "react";
 import './pages/App.css';
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-function App(){
-  
-    return (
-      <div>
-        <Route path = "/">
-          {homePage()}
-        </Route>
-        <Route path = "/result">
-          <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-          {resultPage()}
-        </Route>
-        <Route path = "/rawdata">
-          {viewRawData()}
-        </Route>
-      </div>
-    );
-=======
-=======
->>>>>>> 15f462918363bd5e4ee0d3cc7f1cded949b3db3b
-=======
->>>>>>> 15f462918363bd5e4ee0d3cc7f1cded949b3db3b
 function App() {
 
   const [theLink, updateTheLink] = useState('');
@@ -88,15 +57,11 @@ function App() {
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         {resultPage({ theLink, clicked })}
       </Route>
+      <Route path="/rawdata">
+        {viewRawData()}
+      </Route>
     </div>
   );
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> 5d0da92e0c48a566388f0e2fb918442efc47c2e1
-=======
->>>>>>> 15f462918363bd5e4ee0d3cc7f1cded949b3db3b
-=======
->>>>>>> 15f462918363bd5e4ee0d3cc7f1cded949b3db3b
 
 }
 

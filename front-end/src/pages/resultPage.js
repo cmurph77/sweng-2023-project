@@ -1,78 +1,38 @@
 import testData from '../data/output.json'
-<<<<<<< HEAD
-<<<<<<< HEAD
-import Button from '../components/Button';
-=======
->>>>>>> 15f462918363bd5e4ee0d3cc7f1cded949b3db3b
+import Link from '../components/Link';
 import { useEffect, useRef, useState, useMemo } from 'react';
 import renderPieChart from '../components/PieChart';
 import './App.css';
 import sample_data from '../data/output.json';
 
-<<<<<<< HEAD
-function ResultPage() {
+function ResultPage(props) {
+  const { theLink, clicked } = props
   const [data, setData] = useState(testData);
+  console.log({ theLink });
   useEffect(() => {
-    
-
     async function fetchData() {
-      console.log("hereee");
-      const user_url = "http://rte.ie";
+      const user_url = { theLink };
+      console.log(user_url);
+      console.log("fetch");
       const responseTest = await fetch("http://localhost:3000/api/", {
         method: "POST",
         headers: {
           'Content-type': "application/json"
         },
-        body: JSON.stringify({ url: user_url })
+        body: JSON.stringify({ url: user_url.theLink })
       })
+
       //console.log( await responseTest.json());
       const temp = await responseTest.json();
+
       setData(temp);
-      //const response = await fetch("http://localhost:3000/api/");
-      
 
-    }
-    fetchData();
-  }, []);
-=======
-=======
-import { useEffect, useRef, useState, useMemo } from 'react';
-import renderPieChart from '../components/PieChart';
-import './App.css';
-
->>>>>>> 15f462918363bd5e4ee0d3cc7f1cded949b3db3b
-function ResultPage(props) {
-  const { theLink, clicked } = props
-  const [data, setData] = useState(testData);
-  console.log("here");
-  console.log({ theLink });
-  useEffect(() => {
-    async function fetchData() {
-      if (clicked) {
-        const user_url = { theLink };
-        console.log(user_url);
-        console.log("fetch");
-        const responseTest = await fetch("http://localhost:3000/api/", {
-          method: "POST",
-          headers: {
-            'Content-type': "application/json"
-          },
-          body: JSON.stringify({ url: user_url.theLink })
-        })
-
-        //console.log( await responseTest.json());
-        const temp = await responseTest.json();
-
-        setData(temp);
-      }
       //const response = await fetch("http://localhost:3000/api/");
     }
-    fetchData();
+    if (clicked) {
+      fetchData();
+    }
   }, [{ clicked }]);
-<<<<<<< HEAD
->>>>>>> 15f462918363bd5e4ee0d3cc7f1cded949b3db3b
-=======
->>>>>>> 15f462918363bd5e4ee0d3cc7f1cded949b3db3b
 
   console.log(data);
   const [chartReady, setChartReady] = useState(false);
@@ -113,11 +73,10 @@ function ResultPage(props) {
             style={{ width: '500px' }}
           ></canvas>
         )}
-<<<<<<< HEAD
         <br></br>
-        <Button destination= '/rawdata' label="Click here to view the data from the scan." ></Button>
-=======
->>>>>>> 15f462918363bd5e4ee0d3cc7f1cded949b3db3b
+        <Link to='/rawdata'>
+          <button type='button'>Click here to view the data from the scan.</button>
+        </Link>
       </header>
     </div>
   );

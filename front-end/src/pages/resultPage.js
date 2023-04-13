@@ -23,17 +23,7 @@ function ResultPage() {
       const responseData = await responseTest.json();
       setData(responseData); // updating the data with the resulsts of the latest scan
      
-      const fs = require('fs');
 
-      // const jsonData = JSON.stringify(responseData, null, 2);
-
-      // fs.writeFile('test_output.json', jsonData, (err) => {
-      //   if (err) {
-      //     console.error(err);
-      //     return;
-      //   }
-      //   console.log('Data written to file');
-      // });
     }
     fetchData();
   }, []);

@@ -74,7 +74,9 @@ function ResultPage() {
         {chartReady && (
           <canvas
             ref={chartContainer}
+
             style={{ width: '400px' }}
+
           ></canvas>
         )}
         <br></br>

@@ -1,5 +1,6 @@
 import TextBox from '../components/TextBox';
 import Button from '../components/Button';
+
 import axeCoreLogo from '../images/axeCoreLogo.png';
 //import './App.css';
 
@@ -14,7 +15,7 @@ function homePage(){
           <br></br>
           <TextBox/>
           <br></br>
-          <Button destination = '/result' />
+          <Button destination = '/result' label="Check Accessibility" />
         </header>
       </div>
       );

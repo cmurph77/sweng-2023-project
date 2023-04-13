@@ -1,0 +1,105 @@
+{
+  "_id": {
+    "$oid": "6418bcac33ab189d4338f671"
+  },
+  "problems": [
+    {
+      "id": null,
+      "impactList": null,
+      "description": null,
+      "help": null,
+      "helpURL": null
+    },
+    {
+      "id": "accesskeys",
+      "impactList": null,
+      "description": "Ensures every accesskey attribute value is unique",
+      "help": "accesskey attribute value should be unique",
+      "helpURL": "https://dequeuniversity.com/rules/axe/4.6/accesskeys?application=axeAPI"
+    },
+    {
+      "id": "area-alt",
+      "impactList": null,
+      "description": "Ensures <area> elements of image maps have alternate text",
+      "help": "Active <area> elements must have alternate text",
+      "helpURL": "https://dequeuniversity.com/rules/axe/4.6/area-alt?application=axeAPI"
+    },
+    {
+      "id": "aria-command-name",
+      "impactList": null,
+      "description": "Ensures every ARIA button, link and menuitem has an accessible name",
+      "help": "ARIA commands must have an accessible name",
+      "helpURL": "https://dequeuniversity.com/rules/axe/4.6/aria-command-name?application=axeAPI"
+    },
+    {
+      "id": "aria-dialog-name",
+      "impactList": null,
+      "description": "Ensures every ARIA dialog and alertdialog node has an accessible name",
+      "help": "ARIA dialog and alertdialog nodes should have an accessible name",
+      "helpURL": null
+    },
+    {
+      "id": "nested-interactive",
+      "impactList": null,
+      "description": "Ensures interactive controls are not nested as they are not always announced by screen readers or can cause focus problems for assistive technologies",
+      "help": "Interactive controls must not be nested",
+      "helpURL": "https://dequeuniversity.com/rules/axe/4.6/nested-interactive?application=axeAPI"
+    },
+    {
+      "id": "page-has-heading-one",
+      "impactList": null,
+      "description": "Ensure that the page, or at least one of its frames contains a level-one heading",
+      "help": "Page should contain a level-one heading",
+      "helpURL": "https://dequeuniversity.com/rules/axe/4.6/page-has-heading-one?application=axeAPI"
+    },
+    {
+      "id": "region",
+      "impactList": null,
+      "description": "Ensures all page content is contained by landmarks",
+      "help": "All page content should be contained by landmarks",
+      "helpURL": "https://dequeuniversity.com/rules/axe/4.6/region?application=axeAPI"
+    },
+    {
+      "id": "color-contrast",
+      "impactList": "serious",
+      "description": "Ensures the contrast between foreground and background colors meets WCAG 2 AA contrast ratio thresholds",
+      "help": "Elements must have sufficient color contrast",
+      "helpURL": "https://dequeuniversity.com/rules/axe/4.6/color-contrast?application=axeAPI"
+    },
+    {
+      "id": "color-contrast",
+      "impactList": "serious",
+      "description": "Ensures the contrast between foreground and background colors meets WCAG 2 AA contrast ratio thresholds",
+      "help": "Elements must have sufficient color contrast",
+      "helpURL": "https://dequeuniversity.com/rules/axe/4.6/color-contrast?application=axeAPI"
+    },
+    {
+      "id": "empty-heading",
+      "impactList": "minor",
+      "description": "Ensures headings have discernible text",
+      "help": "Headings should not be empty",
+      "helpURL": "https://dequeuniversity.com/rules/axe/4.6/empty-heading?application=axeAPI"
+    },
+    {
+      "id": "heading-order",
+      "impactList": "moderate",
+      "description": "Ensures the order of headings is semantically correct",
+      "help": "Heading levels should only increase by one",
+      "helpURL": "https://dequeuniversity.com/rules/axe/4.6/heading-order?application=axeAPI"
+    },
+    {
+      "id": "image-alt",
+      "impactList": "critical",
+      "description": "Ensures <img> elements have alternate text or a role of none or presentation",
+      "help": "Images must have alternate text",
+      "helpURL": "https://dequeuniversity.com/rules/axe/4.6/image-alt?application=axeAPI"
+    },
+    {
+      "id": "link-name",
+      "impactList": "serious",
+      "description": "Ensures links have discernible text",
+      "help": "Links must have discernible text",
+      "helpURL": "https://dequeuniversity.com/rules/axe/4.6/link-name?application=axeAPI"
+    }
+  ]
+}

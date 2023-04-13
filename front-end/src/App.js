@@ -1,5 +1,7 @@
 import homePage from './pages/homePage';
 import resultPage from './pages/resultPage';
+import viewRawData from './pages/viewRawData';
+
 import Route from './Route';
 //import React, { useState, useEffect } from "react";
 import './pages/App.css';
@@ -14,6 +16,9 @@ function App(){
         <Route path = "/result">
           <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
           {resultPage()}
+        </Route>
+        <Route path = "/rawdata">
+          {viewRawData()}
         </Route>
       </div>
     );

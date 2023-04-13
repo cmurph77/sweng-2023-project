@@ -1,6 +1,6 @@
 import Link from './Link';
 
-const Button = ({destination}) =>{
+const Button = ({destination,label}) =>{
   const handleClick = () => {
     // what happens when button pressed
   };
@@ -8,7 +8,7 @@ const Button = ({destination}) =>{
   return (
     <Link to = {destination}>
         <button type="button" onClick={handleClick}>
-          Check Accessibility!
+          {label}
         </button>
     </Link>
   );

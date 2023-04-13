@@ -1,7 +1,9 @@
 import testData from '../data/output.json'
+import Button from '../components/Button';
 import { useEffect, useRef, useState, useMemo } from 'react';
 import renderPieChart from '../components/PieChart';
 import './App.css';
+import sample_data from '../data/output.json';
 
 function ResultPage() {
   const [data, setData] = useState(testData);
@@ -67,6 +69,8 @@ function ResultPage() {
             style={{ width: '500px', height: '500px' }}
           ></canvas>
         )}
+        <br></br>
+        <Button destination= '/rawdata' label="Click here to view the data from the scan." ></Button>
       </header>
     </div>
   );

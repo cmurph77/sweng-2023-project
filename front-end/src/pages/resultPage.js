@@ -10,12 +10,13 @@ function ResultPage() {
 
     async function fetchData() {
       console.log("hereee");
+      const user_url = "http://rte.ie";
       const responseTest = await fetch("http://localhost:3000/api/", {
         method: "POST",
         headers: {
           'Content-type': "application/json"
         },
-        body: JSON.stringify({ url: "http://rte.ie" })
+        body: JSON.stringify({ url: user_url })
       })
       //console.log( await responseTest.json());
       const temp = await responseTest.json();
@@ -24,10 +25,7 @@ function ResultPage() {
       
 
     }
-
     fetchData();
-
-
   }, []);
 
   console.log(data);

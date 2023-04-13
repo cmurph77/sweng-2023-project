@@ -3,7 +3,7 @@ import Button from '../components/Button';
 import { useEffect, useRef, useState, useMemo } from 'react';
 import renderPieChart from '../components/PieChart';
 import './App.css';
-import sample_data from '../data/output.json';
+
 
 function ResultPage() {
   const [data, setData] = useState(testData);
@@ -20,18 +20,26 @@ function ResultPage() {
         },
         body: JSON.stringify({ url: user_url })
       })
-      //console.log( await responseTest.json());
-      const temp = await responseTest.json();
-      setData(temp);
-      //const response = await fetch("http://localhost:3000/api/");
-      
+      const responseData = await responseTest.json();
+      setData(responseData); // updating the data with the resulsts of the latest scan
+     
+      const fs = require('fs');
 
+      // const jsonData = JSON.stringify(responseData, null, 2);
+
+      // fs.writeFile('test_output.json', jsonData, (err) => {
+      //   if (err) {
+      //     console.error(err);
+      //     return;
+      //   }
+      //   console.log('Data written to file');
+      // });
     }
     fetchData();
   }, []);
 
-  console.log(data);
   const [chartReady, setChartReady] = useState(false);
+
   const counts = useMemo(() => {
     const result = {};
     data.problems.forEach((problem) => {
@@ -66,7 +74,7 @@ function ResultPage() {
         {chartReady && (
           <canvas
             ref={chartContainer}
-            style={{ width: '500px', height: '500px' }}
+            style={{ width: '400px' }}
           ></canvas>
         )}
         <br></br>
@@ -74,11 +82,6 @@ function ResultPage() {
       </header>
     </div>
   );
-  /*
-   return (
-      <h1>test</h1>
-   );
-   */
 
 }
 export default ResultPage;

@@ -9,12 +9,13 @@ function renderPieChart(counts, chartContainer) {
       datasets: [{
         label: '# of Occurrences',
         data: Object.values(counts),
-        borderWidth: 1,
+        borderWidth: 0.5,
         backgroundColor: [
           'rgba(240, 93, 35, 1)', // orange
           'rgba(11, 110, 79, 1)', // green
           'rgba(255, 227, 41, 1)', // yellow
-          'rgba(140, 0, 26, 1)' // red
+          'rgba(140, 0, 26, 1)', // red
+          'rgba(255, 13, 145, 1)' // pink
         ],
         borderColor: '#080d24'
       }]
